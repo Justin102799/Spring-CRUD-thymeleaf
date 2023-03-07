@@ -29,7 +29,7 @@ public class TaskServiceImpl implements TaskService {
     public TaskEntity getTaskId(long id) {
         Optional<TaskEntity> optional = taskRepository.findById(id);
         TaskEntity taskEntity = null;
-        if(optional.isPresent()){
+        if (optional.isPresent()) {
             taskEntity = optional.get();
         } else {
             throw new RuntimeException(" Task not found for id :: " + id);
@@ -42,12 +42,4 @@ public class TaskServiceImpl implements TaskService {
         this.taskRepository.deleteById(id);
     }
 
-//    @Override
-//    public Page<TaskEntity> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection) {
-//        Sort sort =sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending() :
-//                Sort.by(sortField).descending();
-//
-//        Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
-//        return this.taskRepository.findAll(pageable);
-//    }
 }

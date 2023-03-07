@@ -16,23 +16,17 @@ public class TaskController {
     @Autowired
     private TaskService taskService;
 
-    //    @GetMapping("/")
-//    public String viewHomePage(Model model){
-//        return findPaginated(1, "title", "asc", model);
-//    }
     @GetMapping("/")
     public String viewHomePage(Model model){
         model.addAttribute("listTasks", taskService.getAllTasks());
-        return "/index/index";
+        return "index";
     }
-
-
 
     @GetMapping("/showTaskForm")
     public String showTaskForm(Model model){
         TaskEntity taskEntity = new TaskEntity();
         model.addAttribute("task", taskEntity);
-        return "/index/add_task";
+        return "add_task";
     }
 
     @PostMapping("/saveTask")//@PostMapping("/saveTask")
@@ -45,7 +39,7 @@ public class TaskController {
     public String showFormForUpdate(@PathVariable(value = "id") long id, Model model){
         TaskEntity taskEntity = taskService.getTaskId(id);
         model.addAttribute("task", taskEntity);
-        return "index/update_task";
+        return "update_task";
     }
 
     @GetMapping("/deleteTask/{id}")
@@ -54,26 +48,5 @@ public class TaskController {
         return "redirect:/";
     }
 
-//    @GetMapping("/page/{pageNo}")
-//    public String findPaginated(@PathVariable(value = "pageNo") int pageNo,
-//                                @RequestParam("sortField") String sortField,
-//                                @RequestParam("sortDir") String sortDir,
-//                                Model model){
-//        int pageSize = 5;
-//
-//        Page <TaskEntity> page = taskService.findPaginated(pageNo, pageSize, sortField, sortDir);
-//        List <TaskEntity> listTasks = page.getContent();
-//
-//        model.addAttribute("currentPage", pageNo);
-//        model.addAttribute("totalPages", page.getTotalPages());
-//        model.addAttribute("totalItems", page.getTotalElements());
-//
-//        model.addAttribute("sortField", sortField);
-//        model.addAttribute("sorDir", sortDir);
-//        model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
-//
-//        model.addAttribute("listTasks", listTasks);
-//        return "index";
-    //}
 
 }
